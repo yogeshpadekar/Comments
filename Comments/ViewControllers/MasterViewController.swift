@@ -11,20 +11,26 @@ import CoreData
 
 class MasterViewController: UITableViewController, NSFetchedResultsControllerDelegate {
     
-    var detailViewController: DetailViewController? = nil
+    private var detailViewController: DetailViewController? = nil
     var managedObjectContext: NSManagedObjectContext? = nil
+    private let estimatedRowHeight: CGFloat = 44
+    private let fetchBatchSize = 30
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.rowHeight = UITableView.automaticDimension
-        self.tableView.estimatedRowHeight = 44
+        self.tableView.estimatedRowHeight = self.estimatedRowHeight
+        
+        //Adding pull to refresh support
+        let refreshComments = UIRefreshControl()
+        refreshComments.addTarget(self, action: #selector(fetchComments), for: .valueChanged)
+        refreshComments.attributedTitle = NSAttributedString(string: "Fetching comments...")
+        self.refreshControl = refreshComments
+        self.tableView.setContentOffset(CGPoint(x: 0, y: -refreshComments.frame.size.height), animated: true)
+        
         //Fetch comments
-        WebServices.fetchCommentsFromAPIAndSaveInDatabase {
-            DispatchQueue.main.async {
-                self.tableView.dataSource = self
-                self.tableView.delegate = self
-            }
-        }
+        refreshComments.beginRefreshing()
+        self.fetchComments()
         
         if let split = splitViewController {
             let controllers = split.viewControllers
@@ -35,22 +41,6 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         clearsSelectionOnViewWillAppear = splitViewController!.isCollapsed
-    }
-    
-    // MARK: - Segues
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showDetail" {
-            if let indexPath = tableView.indexPathForSelectedRow {
-                if let controller = (segue.destination as? UINavigationController)?.topViewController as? DetailViewController {
-                controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
-                controller.navigationItem.leftItemsSupplementBackButton = true
-                let comment = self.fetchedResultsController.object(at: indexPath)
-                controller.detailItem = CommentViewModel(comment: comment)
-                self.detailViewController = controller
-                }
-            }
-        }
     }
     
     // MARK: - Table View
@@ -90,7 +80,8 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         
         let fetchRequest: NSFetchRequest<Comment> = Comment.fetchRequest()
         
-        fetchRequest.fetchBatchSize = 30
+        //Specify batch size for better performance
+        fetchRequest.fetchBatchSize = self.fetchBatchSize
         
         //Comments are sorted based on post id
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "postId", ascending: true),
@@ -113,10 +104,40 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         
         return _fetchedResultsController!
     }
-
+    
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         self.tableView.reloadData()
     }
-
+    
+    // MARK: - Segues
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showDetail" {
+            if let indexPath = tableView.indexPathForSelectedRow {
+                if let controller = (segue.destination as? UINavigationController)?.topViewController as? DetailViewController {
+                    controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
+                    controller.navigationItem.leftItemsSupplementBackButton = true
+                    let comment = self.fetchedResultsController.object(at: indexPath)
+                    controller.detailItem = CommentViewModel(comment: comment)
+                    self.detailViewController = controller
+                }
+            }
+        }
+    }
+    
+    // MARK: - API call
+    
+    /// Function to fetch saved comments in database
+    @objc private func fetchComments() {
+        WebServices.fetchCommentsFromAPIAndSaveInDatabase {
+            DispatchQueue.main.async {
+                if self.tableView.dataSource == nil {
+                    self.tableView.dataSource = self
+                    self.tableView.delegate = self
+                }
+                self.refreshControl?.endRefreshing()
+            }
+        }
+    }
+    
 }
 
