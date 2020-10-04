@@ -49,14 +49,14 @@ class WebServices {
     /// Function to delete existing comments from the database
     static private func clearComments() {
         if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
-        let managedObjectContext = appDelegate.persistentContainer.viewContext
-        
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: CommentsConstants.Comment)
-        let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
-        do {
-            try managedObjectContext.execute(batchDeleteRequest)
-        } catch let error as NSError {
-            print("Error while deleting comments from the database = \(error)")
+            let managedObjectContext = appDelegate.persistentContainer.viewContext
+            
+            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: CommentsConstants.Comment)
+            let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+            do {
+                try managedObjectContext.execute(batchDeleteRequest)
+            } catch let error as NSError {
+                print("Error while deleting comments from the database = \(error)")
             }
         }
     }

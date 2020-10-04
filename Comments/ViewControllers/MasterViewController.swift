@@ -34,13 +34,13 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         
         if let split = splitViewController {
             let controllers = split.viewControllers
-            self.detailViewController = (controllers[controllers.count - 1] as! UINavigationController).topViewController as? DetailViewController
+            self.detailViewController = (controllers[controllers.count - 1] as? UINavigationController)?.topViewController as? DetailViewController
         }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        clearsSelectionOnViewWillAppear = splitViewController!.isCollapsed
+        clearsSelectionOnViewWillAppear = splitViewController?.isCollapsed ?? true
     }
     
     // MARK: - Table View
@@ -96,7 +96,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         _fetchedResultsController = aFetchedResultsController
         
         do {
-            try _fetchedResultsController!.performFetch()
+            try _fetchedResultsController?.performFetch()
         } catch {
             let nserror = error as NSError
             print("Unresolved error in fetchedResultsController \(nserror), \(nserror.userInfo)")
