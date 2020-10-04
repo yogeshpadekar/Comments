@@ -33,7 +33,7 @@ class WebServices {
                                 let _ = try responseDecoder.decode([Comment]?.self, from: data ?? Data())
                                 try appDelegate.persistentContainer.viewContext.save()
                             } catch {
-                                print("Error while decoding or saving the data fetched from server = \(error.localizedDescription)")
+                                debugLog("Error while decoding or saving the data fetched from server = \(error.localizedDescription)")
                             }
                             completion()
                         }
@@ -42,7 +42,7 @@ class WebServices {
             })
             task.resume()
         } else {
-            print("There was an error in creating the web service URL")
+            debugLog("There was an error in creating the web service URL")
         }
     }
     
@@ -56,7 +56,7 @@ class WebServices {
             do {
                 try managedObjectContext.execute(batchDeleteRequest)
             } catch let error as NSError {
-                print("Error while deleting comments from the database = \(error)")
+                debugLog("Error while deleting comments from the database = \(error)")
             }
         }
     }

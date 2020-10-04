@@ -22,6 +22,7 @@
 		ECC3FC6925282FE700CA8DE2 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC3FC6825282FE700CA8DE2 /* Comment.swift */; };
 		ECC3FC6C25283E9100CA8DE2 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC3FC6B25283E9100CA8DE2 /* Constants.swift */; };
 		ECC3FC6E2528A4A600CA8DE2 /* CommentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC3FC6D2528A4A600CA8DE2 /* CommentViewModel.swift */; };
+		ECE73B892529AB7F004C7DA5 /* GlobalFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE73B882529AB7F004C7DA5 /* GlobalFunctions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,7 @@
 		ECC3FC6825282FE700CA8DE2 /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		ECC3FC6B25283E9100CA8DE2 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		ECC3FC6D2528A4A600CA8DE2 /* CommentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentViewModel.swift; sourceTree = "<group>"; };
+		ECE73B882529AB7F004C7DA5 /* GlobalFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalFunctions.swift; sourceTree = "<group>"; };
 		EF4745FA3C82D547B9021A35 /* Pods_Comments.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Comments.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -97,7 +99,6 @@
 				774B83D5070AA10A7144006A /* Pods-CommentsTests.debug.xcconfig */,
 				D0400365352036C3DDA573A5 /* Pods-CommentsTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -178,6 +179,7 @@
 			isa = PBXGroup;
 			children = (
 				ECC3FC6B25283E9100CA8DE2 /* Constants.swift */,
+				ECE73B882529AB7F004C7DA5 /* GlobalFunctions.swift */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -334,6 +336,7 @@
 			files = (
 				ECC3FC6E2528A4A600CA8DE2 /* CommentViewModel.swift in Sources */,
 				EC111A932527FF5A00AF098C /* Webservices.swift in Sources */,
+				ECE73B892529AB7F004C7DA5 /* GlobalFunctions.swift in Sources */,
 				EC111A6F2527397700AF098C /* MasterViewController.swift in Sources */,
 				EC111A682527397700AF098C /* AppDelegate.swift in Sources */,
 				ECC3FC6925282FE700CA8DE2 /* Comment.swift in Sources */,

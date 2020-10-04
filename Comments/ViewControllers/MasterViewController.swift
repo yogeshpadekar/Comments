@@ -99,7 +99,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
             try _fetchedResultsController?.performFetch()
         } catch {
             let nserror = error as NSError
-            print("Unresolved error in fetchedResultsController \(nserror), \(nserror.userInfo)")
+            debugLog("Unresolved error in fetchedResultsController \(nserror), \(nserror.userInfo)")
         }
         
         return _fetchedResultsController!
