@@ -16,7 +16,7 @@ class WebServices {
         let session = URLSession.shared
         if let urlComments = URL(string: CommentsConstants.APILink) {
             let task = session.dataTask(with: urlComments, completionHandler: { data, response, error in
-                if error != nil || data == nil {
+                if error != nil || data == nil || (response as? HTTPURLResponse)?.statusCode != 200 {
                     //if there is any error or data is nil then call completion
                     completion()
                 } else {
