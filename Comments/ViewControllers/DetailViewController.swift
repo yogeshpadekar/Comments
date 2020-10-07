@@ -19,7 +19,10 @@ class DetailViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        //Make master view always visible
+        splitViewController?.preferredDisplayMode = .allVisible
+        
         self.configureView()
     }
 

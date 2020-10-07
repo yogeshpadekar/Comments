@@ -1,14 +1,16 @@
 //
-//  Webservices.swift
+//  DataManager.swift
 //  Comments
 //
 //  Created by Yogesh Padekar on 03/10/20.
 //  Copyright © 2020 Yogesh. All rights reserved.
-//
+
+///This class is responsible to fetch the data from web service and save it in core data
+
 import UIKit
 import CoreData
 
-class WebServices {
+class DataManager {
     
     /// Function to get all comments from web service
     /// - Parameter completion: Returns a completion handler for view model to handle
@@ -26,7 +28,7 @@ class WebServices {
                         if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
                             
                             //Clear existing comments before saving newly fetched comments
-                            WebServices.clearComments()
+                            DataManager.clearComments()
                             
                             responseDecoder.userInfo[CodingUserInfoKey.managedObjectContext] = appDelegate.persistentContainer.viewContext
                             do {
@@ -52,11 +54,14 @@ class WebServices {
             let managedObjectContext = appDelegate.persistentContainer.viewContext
             
             let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: CommentsConstants.Comment)
-            let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
             do {
-                try managedObjectContext.execute(batchDeleteRequest)
-            } catch let error as NSError {
-                debugLog("Error while deleting comments from the database = \(error)")
+                let comments = try managedObjectContext.fetch(fetchRequest)
+                for case let comment as NSManagedObject in comments {
+                    managedObjectContext.delete(comment)
+                }
+                try managedObjectContext.save()
+            } catch {
+                debugLog("Error while fetching the records or saving the context = \(error)")
             }
         }
     }

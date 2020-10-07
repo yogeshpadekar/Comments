@@ -83,7 +83,7 @@ class WebservicesTests: XCTestCase {
     /// Including it for demo purpose
     func testActualWebServiceCall() {
         let responseExpectation = self.expectation(description: "comments")
-        WebServices.fetchCommentsFromAPIAndSaveInDatabase {
+        DataManager.fetchCommentsFromAPIAndSaveInDatabase {
             responseExpectation.fulfill()
         }
         waitForExpectations(timeout: 5.0) { (error) in

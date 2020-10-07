@@ -128,7 +128,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     
     /// Function to fetch saved comments in database
     @objc private func fetchComments() {
-        WebServices.fetchCommentsFromAPIAndSaveInDatabase {
+        DataManager.fetchCommentsFromAPIAndSaveInDatabase {
             DispatchQueue.main.async {
                 if self.tableView.dataSource == nil {
                     self.tableView.dataSource = self

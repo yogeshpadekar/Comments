@@ -18,12 +18,13 @@
 		EC111A762527399000AF098C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EC111A752527399000AF098C /* Assets.xcassets */; };
 		EC111A792527399000AF098C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC111A772527399000AF098C /* LaunchScreen.storyboard */; };
 		EC111A842527399400AF098C /* CommentViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC111A832527399400AF098C /* CommentViewModelTests.swift */; };
-		EC111A932527FF5A00AF098C /* Webservices.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC111A922527FF5A00AF098C /* Webservices.swift */; };
+		EC111A932527FF5A00AF098C /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC111A922527FF5A00AF098C /* DataManager.swift */; };
+		EC8E9C5F252BEE3900B9C9C8 /* CoreDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8E9C5B252BE5F100B9C9C8 /* CoreDataTests.swift */; };
 		ECC3FC6925282FE700CA8DE2 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC3FC6825282FE700CA8DE2 /* Comment.swift */; };
 		ECC3FC6C25283E9100CA8DE2 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC3FC6B25283E9100CA8DE2 /* Constants.swift */; };
 		ECC3FC6E2528A4A600CA8DE2 /* CommentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC3FC6D2528A4A600CA8DE2 /* CommentViewModel.swift */; };
+		ECC96109252D04AA00568E3D /* WebserviceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDC93B7252A173E00B7B66A /* WebserviceTests.swift */; };
 		ECD31B0C252BCDDD00CC092D /* MockURLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD31B0B252BCDDC00CC092D /* MockURLSession.swift */; };
-		ECDC93B8252A173E00B7B66A /* WebservicesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDC93B7252A173E00B7B66A /* WebservicesTests.swift */; };
 		ECE73B892529AB7F004C7DA5 /* GlobalFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE73B882529AB7F004C7DA5 /* GlobalFunctions.swift */; };
 		ECE73B8B2529B2E2004C7DA5 /* TestComments.json in Resources */ = {isa = PBXBuildFile; fileRef = ECE73B8A2529B2E2004C7DA5 /* TestComments.json */; };
 /* End PBXBuildFile section */
@@ -57,12 +58,13 @@
 		EC111A7F2527399400AF098C /* CommentsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CommentsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC111A832527399400AF098C /* CommentViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentViewModelTests.swift; sourceTree = "<group>"; };
 		EC111A852527399400AF098C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		EC111A922527FF5A00AF098C /* Webservices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Webservices.swift; sourceTree = "<group>"; };
+		EC111A922527FF5A00AF098C /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		EC8E9C5B252BE5F100B9C9C8 /* CoreDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataTests.swift; sourceTree = "<group>"; };
 		ECC3FC6825282FE700CA8DE2 /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		ECC3FC6B25283E9100CA8DE2 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		ECC3FC6D2528A4A600CA8DE2 /* CommentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentViewModel.swift; sourceTree = "<group>"; };
 		ECD31B0B252BCDDC00CC092D /* MockURLSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLSession.swift; sourceTree = "<group>"; };
-		ECDC93B7252A173E00B7B66A /* WebservicesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebservicesTests.swift; sourceTree = "<group>"; };
+		ECDC93B7252A173E00B7B66A /* WebserviceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebserviceTests.swift; sourceTree = "<group>"; };
 		ECE73B882529AB7F004C7DA5 /* GlobalFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalFunctions.swift; sourceTree = "<group>"; };
 		ECE73B8A2529B2E2004C7DA5 /* TestComments.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = TestComments.json; sourceTree = "<group>"; };
 		EF4745FA3C82D547B9021A35 /* Pods_Comments.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Comments.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -150,7 +152,8 @@
 			isa = PBXGroup;
 			children = (
 				EC111A832527399400AF098C /* CommentViewModelTests.swift */,
-				ECDC93B7252A173E00B7B66A /* WebservicesTests.swift */,
+				ECDC93B7252A173E00B7B66A /* WebserviceTests.swift */,
+				EC8E9C5B252BE5F100B9C9C8 /* CoreDataTests.swift */,
 				ECD31B0B252BCDDC00CC092D /* MockURLSession.swift */,
 				ECE73B8A2529B2E2004C7DA5 /* TestComments.json */,
 				EC111A852527399400AF098C /* Info.plist */,
@@ -170,7 +173,7 @@
 		EC111A90252746B900AF098C /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				EC111A922527FF5A00AF098C /* Webservices.swift */,
+				EC111A922527FF5A00AF098C /* DataManager.swift */,
 				ECC3FC6825282FE700CA8DE2 /* Comment.swift */,
 			);
 			path = Models;
@@ -345,7 +348,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				ECC3FC6E2528A4A600CA8DE2 /* CommentViewModel.swift in Sources */,
-				EC111A932527FF5A00AF098C /* Webservices.swift in Sources */,
+				EC111A932527FF5A00AF098C /* DataManager.swift in Sources */,
 				ECE73B892529AB7F004C7DA5 /* GlobalFunctions.swift in Sources */,
 				EC111A6F2527397700AF098C /* MasterViewController.swift in Sources */,
 				EC111A682527397700AF098C /* AppDelegate.swift in Sources */,
@@ -361,9 +364,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EC8E9C5F252BEE3900B9C9C8 /* CoreDataTests.swift in Sources */,
 				ECD31B0C252BCDDD00CC092D /* MockURLSession.swift in Sources */,
+				ECC96109252D04AA00568E3D /* WebserviceTests.swift in Sources */,
 				EC111A842527399400AF098C /* CommentViewModelTests.swift in Sources */,
-				ECDC93B8252A173E00B7B66A /* WebservicesTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
