@@ -17,3 +17,5 @@
 7. 'Pull to refresh' support is added using 'UIRefreshControl'.
 
 8. Unit tests written for model and view model classes.
+
+9. The app uses 'SwiftLint' pod to maintain the code quality. Please install the pod before running the app.
