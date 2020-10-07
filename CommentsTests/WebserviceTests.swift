@@ -5,13 +5,11 @@
 //  Created by Yogesh Padekar on 04/10/20.
 //  Copyright © 2020 Yogesh. All rights reserved.
 //
-
-import CoreData
 import XCTest
 
 @testable import Comments
 
-class WebservicesTests: XCTestCase {
+class WebserviceTests: XCTestCase {
    private let url = URL(string: CommentsConstants.APILink)
    private var data: Data? = nil
     // Before each unit test, setUp is called
@@ -29,6 +27,7 @@ class WebservicesTests: XCTestCase {
     
     override func tearDownWithError() throws {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
+        self.data = nil
     }
     
     func testCorrectAPICall() {
@@ -36,7 +35,7 @@ class WebservicesTests: XCTestCase {
                                        statusCode: 200,
                                        httpVersion: nil,
                                        headerFields: nil)
-        URLProtocolMock.mockURLs = [url: (nil, self.data, response)] //Passed test case
+        URLProtocolMock.mockURLs = [url: (nil, self.data, response)]
 
         let sessionConfiguration = URLSessionConfiguration.ephemeral
         sessionConfiguration.protocolClasses = [URLProtocolMock.self]
@@ -54,7 +53,7 @@ class WebservicesTests: XCTestCase {
         task.resume()
     }
     
-    func testWrongResponse() {
+    func testErrorResponse() {
         let response = HTTPURLResponse(url: URL(string: CommentsConstants.APILink)!,
                                        statusCode: 404,
                                        httpVersion: nil,
@@ -76,19 +75,4 @@ class WebservicesTests: XCTestCase {
         })
         task.resume()
     }
-    
-    
-    /// Testing actual web service call doesn't follow FIRST principle
-    /// but can sometimes be used to see if anything is wrong with our web service call
-    /// Including it for demo purpose
-    func testActualWebServiceCall() {
-        let responseExpectation = self.expectation(description: "comments")
-        DataManager.fetchCommentsFromAPIAndSaveInDatabase {
-            responseExpectation.fulfill()
-        }
-        waitForExpectations(timeout: 5.0) { (error) in
-            XCTAssertNil(error, "Need to handle a case of error in web service response")
-        }
-    }
-    
 }

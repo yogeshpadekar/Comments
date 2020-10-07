@@ -5,35 +5,46 @@
 //  Created by Yogesh Padekar on 02/10/20.
 //  Copyright © 2020 Yogesh. All rights reserved.
 //
-
 import XCTest
+import CoreData
+
 @testable import Comments
 
 class CommentViewModelTests: XCTestCase {
-    lazy var comments: [Comment] = []
+    private lazy var comments: [Comment] = []
+    
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
-        let testBundle = Bundle(for: type(of: self))
-        if let testJSONURL = testBundle.url(forResource: "TestComments", withExtension: "json") {
-            do {
-                let data = try Data(contentsOf: testJSONURL)
-                if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
+         let testBundle = Bundle(for: type(of: self))
+            if let testJSONURL = testBundle.url(forResource: "TestComments", withExtension: "json") {
+                do {
+                    let data = try Data(contentsOf: testJSONURL)
                     let responseDecoder = JSONDecoder()
-                    responseDecoder.userInfo[CodingUserInfoKey.managedObjectContext] = appDelegate.persistentContainer.viewContext
+                    responseDecoder.userInfo[CodingUserInfoKey.managedObjectContext] = CoreDataTests.mockPersistantContainer.viewContext
                     self.comments = try responseDecoder.decode([Comment].self, from: data)
+                    try CoreDataTests.mockPersistantContainer.viewContext.save()
+                } catch {
+                    debugLog("Error in fetching data from json file or saving the context = \(error)")
                 }
-            } catch {
-                debugLog("Error in fetching data from json file = \(error.localizedDescription)")
             }
-        }
     }
     
     override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
         self.comments.removeAll()
+        let fetchRequest:NSFetchRequest<NSFetchRequestResult> = NSFetchRequest<NSFetchRequestResult>(entityName: CommentsConstants.Comment)
+        do {
+            let allComments = try CoreDataTests.mockPersistantContainer.viewContext.fetch(fetchRequest)
+            for case let comment as NSManagedObject in allComments {
+                CoreDataTests.mockPersistantContainer.viewContext.delete(comment)
+            }
+            try CoreDataTests.mockPersistantContainer.viewContext.save()
+        } catch {
+            print("Error while fetching the records or saving the context = \(error)")
+        }
     }
     
-    func testFetchingComments() {
+    // MARK: - View Model Tests
+    func testCommentsCount() {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
         XCTAssertEqual(self.comments.count, 10)
